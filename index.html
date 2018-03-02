@@ -5,14 +5,49 @@
     <meta charset="UTF-8">
     <title>ID Generator</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <style>
-        div {
-            border-color:black;
-            border-radius:25px;
+        #photo {
+            float: left;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+        }
+
+        span {
+            display: block;
+        }
+
+        #borders {
+            border: 5px solid black;
+            display: none;
+        }
+
+        #instTitle {
+            display: none;
+            margin: auto;
+        }
+
+        #nameOfIdHolder {
+            margin-top:100px;
         }
     </style>
     <script>
         $(function() {
+
+            var config = {
+                apiKey: "AIzaSyCrAurldwa6d9UDGBSUcG2kEIooMxwxgLY",
+                authDomain: "id-project-comments.firebaseapp.com",
+                databaseURL: "https://id-project-comments.firebaseio.com",
+                projectId: "id-project-comments",
+                storageBucket: "",
+                messagingSenderId: "493455366157"
+            };
+            firebase.initializeApp(config);
+            console.log(firebase);
+
             function readURL(input) {
 
                 if (input.files && input.files[0]) {
@@ -26,21 +61,39 @@
                 }
             }
 
+
+
+
             $("#photo").change(function() {
                 readURL(this);
             });
+
             $('button').click(function() {
+                let institutionName = $('#institution').val();
+                let institutionColor = $('#instColor').val();
+                let idHolder = $('#name').val();
+                let idNumber;
+                let dateOfBirth;
                 
+                $('#instTitle').html(institutionName).css('display', 'block').css('background-color', institutionColor);
+                $('#nameOfIdHolder').html(idHolder).css('display', 'inline-block');
+                $('#borders').css('display', 'block');
             });
         });
     </script>
 </head>
 
 <body>
-    Institution: <input id="institution"><br> Name of Id Holder: <input id="noun"><br> Photo: <input type="file" id="photo"><br> Color: <input id="color2"><br>
+    <span>Institution:</span> <input id="institution" placeholder="ex: Telecommunications"><br> 
+    <span> Name of Id Holder:</span> <input id="name" placeholder="ex: Romeo Santos"> <br> 
+    <span>Photo:</span> <input type="file" id="photo"> <br> <br> 
+    <span>Color of Institution Title:</span>    <input id="instColor" placeholder="ex: yellow"><br>
+    
     <button>Generate ID</button><br>
-    <div style="border-color:black;">
+    <div id="borders">
+        <h1 id='instTitle'></h1>
         <img src="#" alt="idphoto" width="100" height="100" id="pic">
+        <p id="nameOfIdHolder"></p>
     </div>
 </body>
 
