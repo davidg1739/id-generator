@@ -31,7 +31,7 @@
         }
 
         #nameOfIdHolder {
-            margin-top:100px;
+            margin-top: 100px;
         }
     </style>
     <script>
@@ -70,30 +70,58 @@
 
             $('button').click(function() {
                 let institutionName = $('#institution').val();
-                let institutionColor = $('#instColor').val();
                 let idHolder = $('#name').val();
-                let idNumber;
-                let dateOfBirth;
+                let idNumber = $('#idNumber').val();
+                let dateOfBirth = $('#DOB').val();
+                let institutionColor = $('#instColor').val();
+                let idHolderFont = $('#fontForIDHolder').val();
                 
                 $('#instTitle').html(institutionName).css('display', 'block').css('background-color', institutionColor);
-                $('#nameOfIdHolder').html(idHolder).css('display', 'inline-block');
+                $('#nameOfIdHolder').html(idHolder).css('display', 'inline-block').css('font-family', idHolderFont);
+                $('#idNum').html(idNumber).css('display', 'inline-block').css('font-family', idHolderFont);
+                $('#birthDate').html(dateOfBirth).css('display', 'inline-block').css('font-family', idHolderFont);
                 $('#borders').css('display', 'block');
+                
             });
         });
     </script>
 </head>
 
 <body>
-    <span>Institution:</span> <input id="institution" placeholder="ex: Telecommunications"><br> 
-    <span> Name of Id Holder:</span> <input id="name" placeholder="ex: Romeo Santos"> <br> 
-    <span>Photo:</span> <input type="file" id="photo"> <br> <br> 
-    <span>Color of Institution Title:</span>    <input id="instColor" placeholder="ex: yellow"><br>
+    <span>Institution:</span> <input id="institution" placeholder="ex: Telecommunications"><br>
+    <span>Photo:</span> <input type="file" id="photo"> <br> <br>
+    <span> Name of ID Holder:</span> <input id="name" placeholder="ex: Romeo Santos"> <br>
+    <span>ID Number:</span> <input id="idNumber" placeholder="ex: 43171915"><br>
+    <span>Date Of Birth:</span> <input type="date" id="DOB"><br>
     
+    <span>Color of Institution Title:</span> <input id="instColor" placeholder="ex: yellow"><br>
+    <span>Font For ID Holder Name, Number, and Date Of Birth:</span>
+    <select id="fontForIDHolder">
+        <option value="Times New Roman" selected>Times New Roman</option>
+        <option value="Arial">Arial</option>
+        <option value="Helvetica">Helvetica</option>
+        <option value="Times">Times</option>
+        <option value="Courier New" >Courier New</option>
+        <option value="Courier">Courier</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Palatino" >Palatino</option>
+        <option value="Garamond">Garamond</option>
+        <option value="Bookman">Bookman</option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+        <option value="Trebuchet MS" >Trebuchet MS</option>
+        <option value="Arial Black">Arial Black</option>
+        <option value="Impact">Helvetica</option>
+        </select> <br>
+
     <button>Generate ID</button><br>
+
     <div id="borders">
         <h1 id='instTitle'></h1>
         <img src="#" alt="idphoto" width="100" height="100" id="pic">
         <p id="nameOfIdHolder"></p>
+        <p id="idNum"></p>
+        <p id="birthDate"></p>
     </div>
 </body>
 
