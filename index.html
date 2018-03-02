@@ -6,33 +6,10 @@
     <title>ID Generator</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+
     <style>
-        #photo {
-            float: left;
-        }
-
-        input {
-            display: block;
-            width: 100%;
-        }
-
-        span {
-            display: block;
-        }
-
-        #borders {
-            border: 5px solid black;
-            display: none;
-        }
-
-        #instTitle {
-            display: none;
-            margin: auto;
-        }
-
-        #nameOfIdHolder {
-            margin-top: 100px;
-        }
+        
     </style>
     <script>
         $(function() {
@@ -45,8 +22,16 @@
                 storageBucket: "",
                 messagingSenderId: "493455366157"
             };
+            
+            var data = {
+                
+            }
+            
             firebase.initializeApp(config);
             console.log(firebase);
+            
+            var database = firebase.database();
+            var comments = database.ref('comments:');
 
             function readURL(input) {
 
@@ -68,19 +53,21 @@
                 readURL(this);
             });
 
-            $('button').click(function() {
+            $('#generateButton').click(function() { 
+                console.log('Generate Button Was Clicked')
                 let institutionName = $('#institution').val();
                 let idHolder = $('#name').val();
                 let idNumber = $('#idNumber').val();
                 let dateOfBirth = $('#DOB').val();
                 let institutionColor = $('#instColor').val();
                 let idHolderFont = $('#fontForIDHolder').val();
+                let bgColor = $('#idBgColor').val();
                 
                 $('#instTitle').html(institutionName).css('display', 'block').css('background-color', institutionColor);
                 $('#nameOfIdHolder').html(idHolder).css('display', 'inline-block').css('font-family', idHolderFont);
                 $('#idNum').html(idNumber).css('display', 'inline-block').css('font-family', idHolderFont);
                 $('#birthDate').html(dateOfBirth).css('display', 'inline-block').css('font-family', idHolderFont);
-                $('#borders').css('display', 'block');
+                $('#borders').css('display', 'block').css('background-color', bgColor);
                 
             });
         });
@@ -94,7 +81,8 @@
     <span>ID Number:</span> <input id="idNumber" placeholder="ex: 43171915"><br>
     <span>Date Of Birth:</span> <input type="date" id="DOB"><br>
     
-    <span>Color of Institution Title:</span> <input id="instColor" placeholder="ex: yellow"><br>
+    <span>Background Color of Institution Title:</span> <input id="instColor" placeholder="ex: yellow"><br>
+    <span>Background Color For ID:</span> <input id="idBgColor" placeholder="ex: green"><br>
     <span>Font For ID Holder Name, Number, and Date Of Birth:</span>
     <select id="fontForIDHolder">
         <option value="Times New Roman" selected>Times New Roman</option>
@@ -112,9 +100,9 @@
         <option value="Trebuchet MS" >Trebuchet MS</option>
         <option value="Arial Black">Arial Black</option>
         <option value="Impact">Helvetica</option>
-        </select> <br>
+    </select> <br> <br>
 
-    <button>Generate ID</button><br>
+    <button id='generateButton'>Generate ID</button><br>
 
     <div id="borders">
         <h1 id='instTitle'></h1>
@@ -122,7 +110,13 @@
         <p id="nameOfIdHolder"></p>
         <p id="idNum"></p>
         <p id="birthDate"></p>
-    </div>
+    </div> <br>
+    <footer>
+        <span style="color:white;">Comments:</span>
+        <input id='commentorName' placeholder="ex: Carlos Peña">
+        <input id='comments' placeholder="ex: Awesome Project!">
+        <button id='commentButton'>Submit Comment</button>
+    </footer>
 </body>
 
 </html>

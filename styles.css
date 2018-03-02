@@ -1,0 +1,30 @@
+#photo {
+            float: left;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+        }
+
+        span {
+            display: block;
+        }
+
+        #borders {
+            border: 5px solid black;
+            display: none;
+        }
+
+        #instTitle {
+            display: none;
+            margin: auto;
+        }
+
+        #nameOfIdHolder {
+            margin-top: 100px;
+        }
+        
+        footer {
+            background: linear-gradient(grey, black);
+        }
