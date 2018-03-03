@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="styles.css" type="text/css">
 
     <style>
-        
     </style>
     <script>
         $(function() {
-
+            var database;
             var config = {
                 apiKey: "AIzaSyCrAurldwa6d9UDGBSUcG2kEIooMxwxgLY",
                 authDomain: "id-project-comments.firebaseapp.com",
@@ -22,16 +21,23 @@
                 storageBucket: "",
                 messagingSenderId: "493455366157"
             };
-            
-            var data = {
-                
-            }
-            
+
             firebase.initializeApp(config);
-            console.log(firebase);
-            
-            var database = firebase.database();
-            var comments = database.ref('comments:');
+
+            database = firebase.database();
+
+            $('#commentButton').click(function() {
+                let name = $('#commentorName').val();
+                let userComment = $('#comment').val();
+                
+                var data = {
+                    Name: name,
+                    Comment: userComment
+                };
+                
+                var ref = database.ref('comments');
+                ref.push(data);
+            });
 
             function readURL(input) {
 
@@ -40,7 +46,7 @@
 
                     reader.onload = function(e) {
                         $('#pic').attr('src', e.target.result);
-                    }
+                    };
 
                     reader.readAsDataURL(input.files[0]);
                 }
@@ -53,7 +59,7 @@
                 readURL(this);
             });
 
-            $('#generateButton').click(function() { 
+            $('#generateButton').click(function() {
                 console.log('Generate Button Was Clicked')
                 let institutionName = $('#institution').val();
                 let idHolder = $('#name').val();
@@ -62,13 +68,13 @@
                 let institutionColor = $('#instColor').val();
                 let idHolderFont = $('#fontForIDHolder').val();
                 let bgColor = $('#idBgColor').val();
-                
+
                 $('#instTitle').html(institutionName).css('display', 'block').css('background-color', institutionColor);
                 $('#nameOfIdHolder').html(idHolder).css('display', 'inline-block').css('font-family', idHolderFont);
                 $('#idNum').html(idNumber).css('display', 'inline-block').css('font-family', idHolderFont);
                 $('#birthDate').html(dateOfBirth).css('display', 'inline-block').css('font-family', idHolderFont);
                 $('#borders').css('display', 'block').css('background-color', bgColor);
-                
+
             });
         });
     </script>
@@ -80,7 +86,7 @@
     <span> Name of ID Holder:</span> <input id="name" placeholder="ex: Romeo Santos"> <br>
     <span>ID Number:</span> <input id="idNumber" placeholder="ex: 43171915"><br>
     <span>Date Of Birth:</span> <input type="date" id="DOB"><br>
-    
+
     <span>Background Color of Institution Title:</span> <input id="instColor" placeholder="ex: yellow"><br>
     <span>Background Color For ID:</span> <input id="idBgColor" placeholder="ex: green"><br>
     <span>Font For ID Holder Name, Number, and Date Of Birth:</span>
@@ -114,7 +120,7 @@
     <footer>
         <span style="color:white;">Comments:</span>
         <input id='commentorName' placeholder="ex: Carlos Peña">
-        <input id='comments' placeholder="ex: Awesome Project!">
+        <input id='comment' placeholder="ex: Awesome Project!">
         <button id='commentButton'>Submit Comment</button>
     </footer>
 </body>
