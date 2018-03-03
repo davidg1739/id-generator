@@ -5,6 +5,10 @@ html {
     background-color:#e6fff2;
 }
 
+#pageHeader {
+    text-align:center;
+}
+
 input {
     display: block;
     width: 100%;
