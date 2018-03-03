@@ -1,27 +1,37 @@
 #photo {
-            float: left;
-        }
+    float: left;
+}
+html {
+    background-color:#e6fff2;
+}
 
-        input {
-            display: block;
-            width: 100%;
-        }
+input {
+    display: block;
+    width: 100%;
+}
 
-        span {
-            display: block;
-        }
+span {
+    display: block;
+}
 
-        #borders {
-            border: 5px solid black;
-            display: none;
-        }
+#borders {
+    border: 5px solid black;
+    display: none;
+}
 
-        #instTitle {
-            display: none;
-            margin: auto;
-        }
+#instTitle {
+    display: none;
+    margin: auto;
+    text-align:center;
+}
 
-        
-        footer {
-            background: linear-gradient(lightgrey, grey);
-        }
+
+footer {
+    background: linear-gradient(lightgrey, grey);
+}
+
+.idHolderInfo {
+    font-weight:bold;
+    width:100%;
+    text-align:center;
+}
