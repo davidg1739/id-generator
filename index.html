@@ -26,56 +26,79 @@
 
             database = firebase.database();
 
-            $('#commentButton').click(function() {
-                let name = $('#commentorName').val();
-                let userComment = $('#comment').val();
-                
-                var data = {
-                    Name: name,
-                    Comment: userComment
-                };
-                
-                var ref = database.ref('comments');
-                ref.push(data);
-            });
+            var ref = database.ref('comments');
+            ref.on("value", gotData, errData);
 
-            function readURL(input) {
+            function gotData(data) {
+                $('.list').empty();
+                let comments = data.val();
+                // Grab the keys to iterate over the comments
+                var keys = Object.keys(comments);
 
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        $('#pic').attr('src', e.target.result);
-                    };
-
-                    reader.readAsDataURL(input.files[0]);
-                }
+                for (var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    let comment = comments[key].Comment;
+                    let name = comments[key].Name;
+                    let newComment = $('<li></li>').addClass('message');
+                    newComment.text(name +":" + " " + comment);
+                    newComment.appendTo('ol.list');
             }
+        }
+
+        function errData(err) {
+            console.log('Lost Data!');
+            console.log(err);
+        }
+
+        $('#commentButton').click(function() {
+            let name = $('#commentorName').val();
+            let userComment = $('#comment').val();
+
+            var data = {
+                Name: name,
+                Comment: userComment
+            };
+
+            ref.push(data);
+        });
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#pic').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
 
 
 
-            $("#photo").change(function() {
-                readURL(this);
-            });
+        $("#photo").change(function() {
+            readURL(this);
+        });
 
-            $('#generateButton').click(function() {
-                console.log('Generate Button Was Clicked')
-                let institutionName = $('#institution').val();
-                let idHolder = $('#name').val();
-                let idNumber = $('#idNumber').val();
-                let dateOfBirth = $('#DOB').val();
-                let institutionColor = $('#instColor').val();
-                let idHolderFont = $('#fontForIDHolder').val();
-                let bgColor = $('#idBgColor').val();
+        $('#generateButton').click(function() {
+            console.log('Generate Button Was Clicked')
+            let institutionName = $('#institution').val();
+            let idHolder = $('#name').val();
+            let idNumber = $('#idNumber').val();
+            let dateOfBirth = $('#DOB').val();
+            let institutionColor = $('#instColor').val();
+            let idHolderFont = $('#fontForIDHolder').val();
+            let bgColor = $('#idBgColor').val();
 
-                $('#instTitle').html(institutionName).css('display', 'block').css('background-color', institutionColor);
-                $('#nameOfIdHolder').html(idHolder).css('display', 'inline-block').css('font-family', idHolderFont);
-                $('#idNum').html(idNumber).css('display', 'inline-block').css('font-family', idHolderFont);
-                $('#birthDate').html(dateOfBirth).css('display', 'inline-block').css('font-family', idHolderFont);
-                $('#borders').css('display', 'block').css('background-color', bgColor);
+            $('#instTitle').html(institutionName).css('display', 'block').css('background-color', institutionColor);
+            $('#nameOfIdHolder').html(idHolder).css('display', 'inline-block').css('font-family', idHolderFont);
+            $('#idNum').html(idNumber).css('display', 'inline-block').css('font-family', idHolderFont);
+            $('#birthDate').html(dateOfBirth).css('display', 'inline-block').css('font-family', idHolderFont);
+            $('#borders').css('display', 'block').css('background-color', bgColor);
 
-            });
+        });
         });
     </script>
 </head>
@@ -112,16 +135,19 @@
 
     <div id="borders">
         <h1 id='instTitle'></h1>
-        <img src="#" alt="idphoto" width="100" height="100" id="pic">
-        <p id="nameOfIdHolder"></p>
-        <p id="idNum"></p>
-        <p id="birthDate"></p>
+        <img src="#" alt="idphoto" width="100" height="100" id="pic"><br>
+        <p id="nameOfIdHolder"></p> <br>
+        <p id="idNum"></p> <br>
+        <p id="birthDate"></p> <br>
     </div> <br>
     <footer>
         <span style="color:white;">Comments:</span>
         <input id='commentorName' placeholder="ex: Carlos Peña">
         <input id='comment' placeholder="ex: Awesome Project!">
         <button id='commentButton'>Submit Comment</button>
+        <ol class="list" style="color:white">
+
+        </ol>
     </footer>
 </body>
 
