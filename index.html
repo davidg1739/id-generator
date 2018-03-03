@@ -91,13 +91,14 @@
             let institutionColor = $('#instColor').val();
             let idHolderFont = $('#fontForIDHolder').val();
             let bgColor = $('#idBgColor').val();
+            let textColor = $('#textColor').val();
 
             $('#instTitle').html(institutionName).css('display', 'block').css('background-color', institutionColor);
             $('#nameOfIdHolder').html(idHolder).css('display', 'inline-block').css('font-family', idHolderFont);
             $('#idNum').html(idNumber).css('display', 'inline-block').css('font-family', idHolderFont);
             $('#birthDate').html(dateOfBirth).css('display', 'inline-block').css('font-family', idHolderFont);
             $('#borders').css('display', 'block').css('background-color', bgColor);
-
+            $('.idHolderInfo').css('color', textColor);
         });
         });
     </script>
@@ -113,6 +114,7 @@
 
     <span>Background Color of Institution Title:</span> <input id="instColor" placeholder="ex: yellow"><br>
     <span>Background Color For ID:</span> <input id="idBgColor" placeholder="ex: green"><br>
+    <span>Text Color:</span> <input id="textColor" placeholder="ex: red"><br>
     <span>Font For ID Holder Name, Number, and Date Of Birth:</span>
     <select id="fontForIDHolder">
         <option value="Times New Roman" selected>Times New Roman</option>
