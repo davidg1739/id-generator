@@ -83,11 +83,10 @@
         });
 
         $('#generateButton').click(function() {
-            console.log('Generate Button Was Clicked')
             let institutionName = $('#institution').val();
             let idHolder = $('#name').val();
             let idNumber = $('#idNumber').val();
-            let dateOfBirth = $('#DOB').val();
+            var dateOfBirth = $('#DOB').val();
             let institutionColor = $('#instColor').val();
             let idHolderFont = $('#fontForIDHolder').val();
             let bgColor = $('#idBgColor').val();
@@ -145,8 +144,8 @@
     </div> <br>
     <footer>
         <span style="color:white;">Comments:</span>
-        <input id='commentorName' placeholder="ex: Carlos Peña">
-        <input id='comment' placeholder="ex: Awesome Project!">
+        <span style="color:white;text-align:center;">Name:</span><input id='commentorName' placeholder="ex: Carlos Peña">
+        <span style="color:white;text-align:center;">Comment:</span><input id='comment' placeholder="ex: Awesome Project!">
         <button id='commentButton'>Submit Comment</button>
         <ol class="list" style="color:white">
 
