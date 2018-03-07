@@ -58,8 +58,13 @@
                 Name: name,
                 Comment: userComment
             };
-
-            ref.push(data);
+            if (data.Name == "" || data.Comment == "") {
+                confirm('Please make sure that you fill out both parts of the comment section if you are going to submit a comment.');
+            }
+            
+            else {
+              ref.push(data);  
+            }
         });
 
         function readURL(input) {
